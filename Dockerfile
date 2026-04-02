@@ -48,7 +48,9 @@ RUN apt-get update -y && \
         build-essential ca-certificates gnupg \
         pkg-config libssl-dev libffi-dev libsqlite3-dev \
         sqlite3 less file tree patch \
-        fonts-dejavu-core fonts-noto-core fonts-liberation2 && \
+        fonts-dejavu-core fonts-noto-core fonts-liberation2 \
+        gnome-keyring libsecret-1-0 \
+        sox && \
     # Optional apt-based tools
     if [ "$INSTALL_PYTHON" = "true" ]; then \
         apt-get install -y --no-install-recommends \
