@@ -93,7 +93,7 @@ if [ ! -d ".ai" ]; then
 fi
 
 # Persist AI tool configs between runs
-mkdir -p .ai/claude-home .ai/gemini-home .ai/codex-home .ai/copilot-home
+mkdir -p .ai/claude-home .ai/gemini-home .ai/codex-home .ai/copilot-home .ai/opencode-home
 [[ -f .ai/claude-home/claude.json ]] || echo '{}' > .ai/claude-home/claude.json
 
 echo "Starting aidevtools container ($IMAGE)..."
@@ -130,6 +130,7 @@ docker run -it --rm \
   -v "$(pwd)/.ai/gemini-home":/home/devuser/.gemini \
   -v "$(pwd)/.ai/codex-home":/home/devuser/.codex \
   -v "$(pwd)/.ai/copilot-home":/home/devuser/.config/github-copilot \
+  -v "$(pwd)/.ai/opencode-home":/home/devuser/.config/opencode \
   -w /home/devuser/repo \
   ${OPTIONAL_MOUNTS[@]+"${OPTIONAL_MOUNTS[@]}"} \
   "$IMAGE" "${FINAL_CMD[@]}"

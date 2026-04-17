@@ -22,6 +22,7 @@ ARG INSTALL_CLAUDE=true
 ARG INSTALL_CODEX=true
 ARG INSTALL_COPILOT=true
 ARG INSTALL_GEMINI=true
+ARG INSTALL_OPENCODE=true
 
 # Dev tools
 ARG INSTALL_GH=true
@@ -30,14 +31,14 @@ ARG INSTALL_TMUX=true
 ARG INSTALL_DIRENV=true
 
 # Pinned versions — override at build time if needed
-ARG JAVA_VERSION=""
+ARG JAVA_VERSION=25-tem
 ARG NODE_VERSION=--lts
 ARG PYTHON_VERSION=3.12
 ARG NVM_VERSION=0.40.4
 ARG GO_VERSION=1.26.1
-ARG CODEX_VERSION=0.117.0
-ARG GEMINI_VERSION=0.35.3
-ARG DENO_VERSION=v2.7.7
+ARG CODEX_VERSION=0.121.0
+ARG GEMINI_VERSION=0.38.1
+ARG DENO_VERSION=v2.7.12
 
 # ══════════════════════════════════════════════
 # 1. System packages & optional tools (root)
@@ -158,6 +159,12 @@ RUN set -euxo pipefail && \
 RUN set -euxo pipefail && \
     if [ "$INSTALL_GEMINI" = "true" ] && [ "$INSTALL_NODE" = "true" ]; then \
         bash -c "source ~/.nvm/nvm.sh && npm install -g @google/gemini-cli@${GEMINI_VERSION}"; \
+    fi
+
+# --- OpenCode CLI ---
+RUN set -euxo pipefail && \
+    if [ "$INSTALL_OPENCODE" = "true" ] && [ "$INSTALL_NODE" = "true" ]; then \
+        curl -fsSL https://opencode.ai/install | bash; \
     fi
 
 
