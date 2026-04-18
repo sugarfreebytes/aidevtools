@@ -87,6 +87,7 @@ Note: AI tool configs will be lost when the container exits.
 | neovim                            | `INSTALL_NEOVIM`     |
 | tmux                              | `INSTALL_TMUX`       |
 | direnv                            | `INSTALL_DIRENV`     |
+| Playwright system deps            | `INSTALL_PLAYWRIGHT` |
 
 ## Custom builds
 

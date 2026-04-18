@@ -29,6 +29,7 @@ ARG INSTALL_GH=true
 ARG INSTALL_NEOVIM=true
 ARG INSTALL_TMUX=true
 ARG INSTALL_DIRENV=true
+ARG INSTALL_PLAYWRIGHT=true
 
 # Pinned versions — override at build time if needed
 ARG JAVA_VERSION=25-tem
@@ -166,6 +167,17 @@ RUN set -euxo pipefail && \
     if [ "$INSTALL_OPENCODE" = "true" ] && [ "$INSTALL_NODE" = "true" ]; then \
         curl -fsSL https://opencode.ai/install | bash; \
     fi
+
+# --- Playwright system deps (needs root for apt-get; npx from devuser's NVM) ---
+USER root
+RUN set -euxo pipefail && \
+    if [ "$INSTALL_PLAYWRIGHT" = "true" ] && [ "$INSTALL_NODE" = "true" ]; then \
+        export NVM_DIR=/home/devuser/.nvm && \
+        export DEBIAN_FRONTEND=noninteractive && \
+        bash -c "source \$NVM_DIR/nvm.sh && npx --yes playwright install-deps" && \
+        rm -rf /var/lib/apt/lists/*; \
+    fi
+USER devuser
 
 
 # ══════════════════════════════════════════════
