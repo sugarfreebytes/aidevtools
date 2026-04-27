@@ -37,8 +37,9 @@ ARG NODE_VERSION=--lts
 ARG PYTHON_VERSION=3.12
 ARG NVM_VERSION=0.40.4
 ARG GO_VERSION=1.26.1
-ARG CODEX_VERSION=0.121.0
-ARG GEMINI_VERSION=0.38.1
+ARG CLAUDE_VERSION=2.1.119
+ARG CODEX_VERSION=0.125.0
+ARG GEMINI_VERSION=0.39.1
 ARG DENO_VERSION=v2.7.12
 
 # ══════════════════════════════════════════════
@@ -141,7 +142,7 @@ RUN set -euxo pipefail && \
 # --- Claude CLI ---
 RUN set -euxo pipefail && \
     if [ "$INSTALL_CLAUDE" = "true" ]; then \
-        curl -fsSL https://claude.ai/install.sh | bash; \
+        curl -fsSL https://claude.ai/install.sh | bash -s ${CLAUDE_VERSION}; \
     fi
 
 # --- OpenAI Codex ---
