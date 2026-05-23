@@ -23,6 +23,7 @@ ARG INSTALL_CODEX=true
 ARG INSTALL_COPILOT=true
 ARG INSTALL_GEMINI=true
 ARG INSTALL_OPENCODE=true
+ARG INSTALL_CURSOR=true
 
 # Dev tools
 ARG INSTALL_GH=true
@@ -37,9 +38,9 @@ ARG NODE_VERSION=--lts
 ARG PYTHON_VERSION=3.12
 ARG NVM_VERSION=0.40.4
 ARG GO_VERSION=1.26.1
-ARG CLAUDE_VERSION=2.1.119
-ARG CODEX_VERSION=0.125.0
-ARG GEMINI_VERSION=0.39.1
+ARG CLAUDE_VERSION=2.1.148
+ARG CODEX_VERSION=0.133.0
+ARG GEMINI_VERSION=0.43.0
 ARG DENO_VERSION=v2.7.12
 
 # ══════════════════════════════════════════════
@@ -167,6 +168,12 @@ RUN set -euxo pipefail && \
 RUN set -euxo pipefail && \
     if [ "$INSTALL_OPENCODE" = "true" ] && [ "$INSTALL_NODE" = "true" ]; then \
         curl -fsSL https://opencode.ai/install | bash; \
+    fi
+
+# --- Cursor CLI ---
+RUN set -euxo pipefail && \
+    if [ "$INSTALL_CURSOR" = "true" ]; then \
+        curl https://cursor.com/install -fsS | bash; \
     fi
 
 # --- Playwright system deps (needs root for apt-get; npx from devuser's NVM) ---

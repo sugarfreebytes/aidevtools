@@ -67,6 +67,7 @@ Note: AI tool configs will be lost when the container exits.
 | OpenAI Codex       | `INSTALL_CODEX`   |
 | GitHub Copilot CLI | `INSTALL_COPILOT` |
 | Google Gemini CLI  | `INSTALL_GEMINI`  |
+| Cursor CLI         | `INSTALL_CURSOR`  |
 
 ### Language stacks / runtimes
 
