@@ -38,9 +38,9 @@ ARG NODE_VERSION=--lts
 ARG PYTHON_VERSION=3.12
 ARG NVM_VERSION=0.40.4
 ARG GO_VERSION=1.26.1
-ARG CLAUDE_VERSION=2.1.156
-ARG CODEX_VERSION=0.135.0
-ARG GEMINI_VERSION=0.44.1
+ARG CLAUDE_VERSION=2.1.177
+ARG CODEX_VERSION=0.139.0
+ARG GEMINI_VERSION=0.46.0
 ARG DENO_VERSION=v2.7.12
 
 # ══════════════════════════════════════════════
@@ -48,7 +48,7 @@ ARG DENO_VERSION=v2.7.12
 # ══════════════════════════════════════════════
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
-        bash zsh curl wget git jq zip unzip \
+        bash zsh curl wget git jq zip unzip zlib1g-dev \
         build-essential ca-certificates gnupg \
         pkg-config libssl-dev libffi-dev libsqlite3-dev \
         sqlite3 less file tree patch \
