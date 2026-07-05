@@ -22,6 +22,7 @@ ARG INSTALL_CLAUDE=true
 ARG INSTALL_CODEX=true
 ARG INSTALL_COPILOT=true
 ARG INSTALL_GEMINI=true
+ARG INSTALL_ANTIGRAVITY=true
 ARG INSTALL_OPENCODE=true
 ARG INSTALL_CURSOR=true
 
@@ -38,9 +39,11 @@ ARG NODE_VERSION=--lts
 ARG PYTHON_VERSION=3.12
 ARG NVM_VERSION=0.40.4
 ARG GO_VERSION=1.26.1
-ARG CLAUDE_VERSION=2.1.177
-ARG CODEX_VERSION=0.139.0
-ARG GEMINI_VERSION=0.46.0
+ARG CLAUDE_VERSION=2.1.201
+ARG CODEX_VERSION=0.142.5
+ARG COPILOT_VERSION=1.0.68
+ARG GEMINI_VERSION=0.49.0
+ARG OPENCODE_VERSION=1.17.13
 ARG DENO_VERSION=v2.7.12
 
 # ══════════════════════════════════════════════
@@ -155,7 +158,7 @@ RUN set -euxo pipefail && \
 # --- GitHub Copilot ---
 RUN set -euxo pipefail && \
     if [ "$INSTALL_COPILOT" = "true" ] && [ "$INSTALL_NODE" = "true" ]; then \
-        bash -c "source ~/.nvm/nvm.sh && npm install -g @github/copilot"; \
+        bash -c "source ~/.nvm/nvm.sh && npm install -g @github/copilot@${COPILOT_VERSION}"; \
     fi
 
 # --- Google Gemini CLI ---
@@ -164,10 +167,16 @@ RUN set -euxo pipefail && \
         bash -c "source ~/.nvm/nvm.sh && npm install -g @google/gemini-cli@${GEMINI_VERSION}"; \
     fi
 
+# --- Google Antigravity CLI ---
+RUN set -euxo pipefail && \
+    if [ "$INSTALL_ANTIGRAVITY" = "true" ]; then \
+        curl -fsSL https://antigravity.google/cli/install.sh | bash; \
+    fi
+
 # --- OpenCode CLI ---
 RUN set -euxo pipefail && \
     if [ "$INSTALL_OPENCODE" = "true" ] && [ "$INSTALL_NODE" = "true" ]; then \
-        curl -fsSL https://opencode.ai/install | bash; \
+        curl -fsSL https://opencode.ai/install | bash -s -- --version ${OPENCODE_VERSION}; \
     fi
 
 # --- Cursor CLI ---

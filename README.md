@@ -1,8 +1,9 @@
 # aidevtools
 
-A Docker image for running AI coding assistants in an isolated environment, with all the compilers, package managers, and dev tools they need pre-installed — without polluting your host machine.
+A Docker image for running AI coding assistants in an isolated environment, with all the compilers, package managers,
+and dev tools they need pre-installed — without polluting your host machine.
 
-Ships with Claude, Codex, Copilot, and Gemini plus Java, Node, Python, Go, Rust, and Deno.
+Ships with Claude, Codex, Copilot, Gemini, Antigravity, OpenCode, and Cursor plus Java, Node, Python, Go, Rust, and Deno.
 
 ## Quick start
 
@@ -31,6 +32,9 @@ aidevtools claude
 aidevtools codex
 aidevtools copilot
 aidevtools gemini
+aidevtools antigravity
+aidevtools opencode
+aidevtools cursor
 
 # Use a custom image
 aidevtools -i my-custom-image
@@ -61,13 +65,15 @@ Note: AI tool configs will be lost when the container exits.
 
 ### AI coding assistants
 
-| Tool               | Flag              |
-|--------------------|-------------------|
-| Claude CLI         | `INSTALL_CLAUDE`  |
-| OpenAI Codex       | `INSTALL_CODEX`   |
-| GitHub Copilot CLI | `INSTALL_COPILOT` |
-| Google Gemini CLI  | `INSTALL_GEMINI`  |
-| Cursor CLI         | `INSTALL_CURSOR`  |
+| Tool                   | Flag                  |
+|------------------------|-----------------------|
+| Claude CLI             | `INSTALL_CLAUDE`      |
+| OpenAI Codex           | `INSTALL_CODEX`       |
+| GitHub Copilot CLI     | `INSTALL_COPILOT`     |
+| Google Gemini CLI      | `INSTALL_GEMINI`      |
+| Google Antigravity CLI | `INSTALL_ANTIGRAVITY` |
+| OpenCode CLI           | `INSTALL_OPENCODE`    |
+| Cursor CLI             | `INSTALL_CURSOR`      |
 
 ### Language stacks / runtimes
 
@@ -82,13 +88,13 @@ Note: AI tool configs will be lost when the container exits.
 
 ### Dev tools
 
-| Tool                              | Flag                 |
-|-----------------------------------|----------------------|
-| GitHub CLI (`gh`)                 | `INSTALL_GH`         |
-| neovim                            | `INSTALL_NEOVIM`     |
-| tmux                              | `INSTALL_TMUX`       |
-| direnv                            | `INSTALL_DIRENV`     |
-| Playwright system deps            | `INSTALL_PLAYWRIGHT` |
+| Tool                   | Flag                 |
+|------------------------|----------------------|
+| GitHub CLI (`gh`)      | `INSTALL_GH`         |
+| neovim                 | `INSTALL_NEOVIM`     |
+| tmux                   | `INSTALL_TMUX`       |
+| direnv                 | `INSTALL_DIRENV`     |
+| Playwright system deps | `INSTALL_PLAYWRIGHT` |
 
 ## Custom builds
 
@@ -110,10 +116,10 @@ Pinned versions can also be overridden:
 ```bash
 docker build \
   --build-arg GO_VERSION=1.26.1 \
-  --build-arg GEMINI_VERSION=0.35.3 \
+  --build-arg GEMINI_VERSION=0.49.0 \
   -t aidevtools .
 ```
 
-Available version args: `JAVA_VERSION`, `NODE_VERSION`, `PYTHON_VERSION`, `GO_VERSION`,
-`NVM_VERSION`, `CODEX_VERSION`, `GEMINI_VERSION`, `DENO_VERSION`.
+Available version args: `JAVA_VERSION`, `NODE_VERSION`, `PYTHON_VERSION`, `NVM_VERSION`, `GO_VERSION`,
+`DENO_VERSION`, `CLAUDE_VERSION`, `CODEX_VERSION`, `COPILOT_VERSION`, `GEMINI_VERSION`, `OPENCODE_VERSION`.
 
